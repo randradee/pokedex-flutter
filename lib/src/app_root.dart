@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/src/presenter/pages/pokedex/view/pokedex.dart';
 
 class AppRoot extends StatelessWidget {
   const AppRoot({super.key});
@@ -9,10 +10,12 @@ class AppRoot extends StatelessWidget {
       title: 'Pokedex',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromRGBO(220, 10, 45, 1),
+        ),
         useMaterial3: true,
       ),
-      home: const Placeholder(),
+      home: const Pokedex(),
     );
   }
 }

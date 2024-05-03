@@ -15,7 +15,7 @@ class AppRoot extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const Pokedex(),
+      home: Pokedex(),
     );
   }
 }

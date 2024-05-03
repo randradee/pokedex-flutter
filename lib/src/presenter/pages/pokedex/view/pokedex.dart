@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pokedex/src/config/theme/theme.dart';
+import 'package:pokedex/src/helpers/helpers.dart';
+import 'package:pokedex/src/presenter/pages/pokedex/view/components/pokemon_card.dart';
+import 'package:pokedex/src/config/mocked_data.dart' as mocked_data;
 
 class Pokedex extends StatelessWidget {
-  const Pokedex({super.key});
+  final _helpers = Helpers();
+
+  Pokedex({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,7 @@ class Pokedex extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Column(
               children: [
-                // Parte superior
+                // Header
                 Column(
                   children: [
                     // Ícone e título
@@ -51,7 +56,7 @@ class Pokedex extends StatelessWidget {
 
                     // Barra de pesquisa e filtro
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
                       child: Row(
                         children: [
                           // Barra de pesquisa
@@ -104,6 +109,32 @@ class Pokedex extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: AppColors.grayscale['background'],
                       borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.shade100,
+                          blurStyle: BlurStyle.inner,
+                          spreadRadius: 2,
+                          blurRadius: 1,
+                          offset: const Offset(0, 2),
+                        )
+                      ],
+                    ),
+                    child: GridView.builder(
+                      padding: const EdgeInsets.fromLTRB(12, 24, 12, 8),
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                      ),
+                      itemCount: mocked_data.pokemons.length,
+                      itemBuilder: (_, index) {
+                        return PokemonCard(
+                          number: _helpers.formatPokemonNumber(
+                              mocked_data.pokemons[index].number),
+                          imgUrl: mocked_data.pokemons[index].imageUrl,
+                          name: mocked_data.pokemons[index].name,
+                        );
+                      },
                     ),
                   ),
                 ),
